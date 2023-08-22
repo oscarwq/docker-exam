@@ -1,0 +1,27 @@
+version: '3'
+networks:
+  redExt:
+    driver: bridge
+    
+services:
+  nginx:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8835:80"
+    volumes:
+        - ~C:\Users\OSCAR\Desktop\OscarPinillo-2529148\datadrive:/usr/share/nginx/html
+    networks:
+      - redExt
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: myuserpassword
+    ports:
+      - "3306:3306"
+    networks:
+      - redExt
